@@ -3,44 +3,38 @@ import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {Context as GameContext} from '../context/GameContext';
+import blockStyles from '../styles/components/block.styles';
 
 function Block(props) {
-  const {num, x, y, isFocused, isClicked} = props;
-  const {setClicked} = useContext(GameContext);
+  const {num, x, y, isFocused, isClicked, isFixed} = props;
+  const { state, setClicked, setFocused, enterNumber } = useContext(GameContext);
+  const consoleFocused = state.nums.find(x => x.isFocused);
+  const setFocusedCallback = () => setFocused({num: consoleFocused.num});
+  const enterNumberCallback = () => enterNumber({num: consoleFocused.num}, setFocusedCallback);
   const handleClick = () => {
-    setClicked({num, x, y})
+    consoleFocused ? setClicked({num: consoleFocused.num, x, y}, enterNumberCallback) : setClicked({num, x, y});
   }
+  const borderRight = (y === 2 || y === 5);
+  const borderBottom = (x === 2 || x === 5);
+  const frameBottomEnd = x !== 8;
+  const frameRightEnd = y!== 8;
   return (
-    <View onTouchStart={handleClick} style={{...styles.main}}>
+    <View onTouchStart={!isFixed && handleClick} style={[
+      blockStyles.main,      
+      borderBottom ? blockStyles.borderBoxBottom : (frameBottomEnd ? blockStyles.boxGeneralBottom : null),
+      borderRight ? blockStyles.borderBoxRight : (frameRightEnd ? blockStyles.boxGeneralRight : null),
+    ]}>
       <Text 
-        style={[styles.blockText, isFocused ? styles.focused: null, isClicked ? styles.clicked: null]}
+        style={[
+          blockStyles.blockText,
+          isFixed? blockStyles.fixed : null,
+          isFocused ? blockStyles.focused: null, 
+          isClicked ? blockStyles.clicked: null]}
       > 
         {num !== 0 && num} 
       </Text>
     </View>
   )
 };
-
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: "white",
-    width: 40,
-    height: 40
-  },
-  blockText: {
-    color: "white",
-    fontSize: 25,
-    textAlign: "center"
-  },
-  focused: {
-    backgroundColor: "grey"
-  },
-  clicked: {
-    backgroundColor: "white",
-    color: "black"
-  }
-})
 
 export default Block;

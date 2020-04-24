@@ -23,9 +23,9 @@ function Board(props) {
 
 const styles = StyleSheet.create({
   main: {
-    width: 360,
-    height: 360,
-    marginHorizontal: 15,
+    width: 400,
+    height: 400,
+    marginHorizontal: 0,
     marginTop: 40
   },
   row: {

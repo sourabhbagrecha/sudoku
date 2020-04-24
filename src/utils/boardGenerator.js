@@ -1,8 +1,8 @@
 // import { set } from "react-native-reanimated";
-// import levels from '../constants/levelsConfig.json';
+import levels from '../constants/levelsConfig.json';
 
 export default (sudoku, level) => {
-  const blanks = 37;
+  const blanks = levels.find(x => x.title === level)['blanks'];
   const sets = [];
   const blankSets = [];
   for(let row=0; row<9; row++){

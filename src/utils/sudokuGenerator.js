@@ -1,6 +1,6 @@
 import boardGenerator from "./boardGenerator";
 
-export default (level="Easy") => {
+export default (level) => {
   const nums = [1,2,3,4,5,6,7,8,9]
   const series = [];
   while(nums.length !== 0){
@@ -27,6 +27,7 @@ export default (level="Easy") => {
       y, 
       isFocused: false,
       isClicked: false,
+      isFixed: num === 0 ? false : true,
       num
     }
   )));

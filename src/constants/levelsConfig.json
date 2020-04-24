@@ -1,14 +1,22 @@
 [
   {
+    "title": "Beginner",
+    "blanks": 24
+  },
+  {
     "title": "Easy",
-    "blanks": 37
+    "blanks": 32
   },
   {
     "title": "Medium",
-    "blanks": 46
+    "blanks": 40
   },
   {
     "title": "Hard",
-    "blanks": 58
+    "blanks": 48
+  },
+  {
+    "title": "Extreme",
+    "blanks": 56
   }
 ]

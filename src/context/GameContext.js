@@ -1,75 +1,44 @@
 import createDataContext from "./createDataContext";
 import sudokuGenerator from "../utils/sudokuGenerator";
+import GameReducer from "../reducers/Game.reducer";
 
-const GameReducer = (state, action) => {
-  const {x, y, num, isFocused} = action.payload;
-  switch(action.type){
-    case 'set_focused': 
-      return {
-        ...state,
-        nums: state.nums.map(button => {
-          if(button.num === num){
-            return {...button, isFocused: true}
-          } else {
-            return {...button, isFocused: false}
-          }
-        }),
-        board: state.board.map(row => row.map(b => {
-          if(b.num === num){
-            return {...b, isFocused: true}
-          } else {
-            return {...b, isFocused: false}
-          }
-        }))
-      }
-    case 'set_clicked': 
-      return {
-        ...state,
-        board: state.board.map(row => row.map(b => {
-          if(b.x === x && b.y === y){
-            return {...b, isFocused: false, isClicked: true}
-          } else {
-            return {...b, isFocused: false, isClicked: false}
-          }
-        }))
-      }
-    case 'enter_number':
-      return {
-        ...state,
-        board: state.board.map(row => row.map(b => {
-          if(b.isClicked === true){
-            return {...b, num: num, isClicked: false}
-          } else {
-            return b
-          }
-        }))
-      }
-    default: 
-      return state
-  }
-};
-
-const setClicked = dispatch => (payload) => {
+const setClicked = dispatch => (payload, callback) => {
   dispatch({ type: "set_clicked", payload });
-}
+  if(callback) callback();
+};
 
 const setFocused = dispatch => (payload) => {
   dispatch({ type: "set_focused", payload });
 };
 
-const enterNumber = dispatch => (payload) => {
+const enterNumber = dispatch => (payload, callback) => {
   dispatch({ type: "enter_number", payload});
+  if(callback) callback();
 };
 
-const { puzzle, solution } = sudokuGenerator();
+const resetConsoleFocus = dispatch => (payload, callback) => {
+  dispatch({ type: "reset_console_focus", payload });
+  if(callback) callback();
+};
+
+const resetBoardFocus = dispatch => (payload) => {
+  dispatch({ type: "reset_board_focus", payload });
+};
+
+const { puzzle, solution } = sudokuGenerator("Medium");
 
 const initialState = {
   board: puzzle,
   solution,
-  nums: Array(9).fill(0).map((_, i) => ({
-    num: i+1,
+  nums: Array(10).fill(0).map((_, i) => ({
+    num: i,
     isFocused: false
-  }))
+  })),
+  level: "Medium"
 };
 
-export const {Context, Provider} = createDataContext(GameReducer, {setFocused, setClicked, enterNumber}, initialState);
+export const {Context, Provider} = createDataContext(
+  GameReducer, 
+  {setFocused, setClicked, enterNumber, resetConsoleFocus, resetBoardFocus}, 
+  initialState
+);

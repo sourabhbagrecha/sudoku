@@ -4,10 +4,12 @@ import {Context as GameContext} from '../context/GameContext';
 
 function ConsoleButton(props) {
   const { num, isFocused } = props;
-  const { state: { board }, enterNumber, setFocused} = useContext(GameContext);
+  const { state: { board }, enterNumber, setFocused, resetConsoleFocus, resetBoardFocus} = useContext(GameContext);
+  const resetBoardFocusCallback = () => resetBoardFocus({num});
   const handleClick = () => {
     const requireFocus = board.every( row => row.every( cell => cell.isClicked === false ));
-    console.log(requireFocus)
+    console.log({isFocused})
+    if(isFocused) return resetConsoleFocus({num}, resetBoardFocusCallback);
     if(requireFocus){
       setFocused({num})
     } else {
@@ -18,18 +20,18 @@ function ConsoleButton(props) {
     <View
       style={[styles.main, isFocused && styles.focusedButton]}
       onTouchStart={handleClick}>
-      <Text style={[styles.buttonText, isFocused && styles.focusedText]}>{num}</Text>
+      <Text style={[styles.buttonText, isFocused && styles.focusedText]}>{num === 0 ? "X" : num}</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   main: {
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: "white",
     width: 60,
     height: 60,
-    borderRadius: 30,
+    borderRadius: 16,
     margin: 5,
   },
   buttonText: {
@@ -44,6 +46,6 @@ const styles = StyleSheet.create({
   focusedText: {
     color: "black"
   }
-})
+});
 
-export default ConsoleButton
+export default ConsoleButton;
