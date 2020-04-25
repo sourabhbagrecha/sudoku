@@ -25,6 +25,10 @@ const resetBoardFocus = dispatch => (payload) => {
   dispatch({ type: "reset_board_focus", payload });
 };
 
+const changeLevel = dispatch => (payload) => {
+  dispatch({ type: "change_level", payload });
+}
+
 const { puzzle, solution } = sudokuGenerator("Medium");
 
 const initialState = {
@@ -39,6 +43,6 @@ const initialState = {
 
 export const {Context, Provider} = createDataContext(
   GameReducer, 
-  {setFocused, setClicked, enterNumber, resetConsoleFocus, resetBoardFocus}, 
+  {setFocused, setClicked, enterNumber, resetConsoleFocus, resetBoardFocus, changeLevel}, 
   initialState
 );

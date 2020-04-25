@@ -4,10 +4,13 @@ import { Text } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {Context as GameContext} from '../context/GameContext';
 import blockStyles from '../styles/components/block.styles';
+import { Context as ThemeContext } from '../context/ThemeContext';
 
 function Block(props) {
   const {num, x, y, isFocused, isClicked, isFixed} = props;
   const { state, setClicked, setFocused, enterNumber } = useContext(GameContext);
+  const { state: { currentTheme } } = useContext(ThemeContext);
+  const styles = blockStyles(currentTheme);
   const consoleFocused = state.nums.find(x => x.isFocused);
   const setFocusedCallback = () => setFocused({num: consoleFocused.num});
   const enterNumberCallback = () => enterNumber({num: consoleFocused.num}, setFocusedCallback);
@@ -20,16 +23,18 @@ function Block(props) {
   const frameRightEnd = y!== 8;
   return (
     <View onTouchStart={!isFixed && handleClick} style={[
-      blockStyles.main,      
-      borderBottom ? blockStyles.borderBoxBottom : (frameBottomEnd ? blockStyles.boxGeneralBottom : null),
-      borderRight ? blockStyles.borderBoxRight : (frameRightEnd ? blockStyles.boxGeneralRight : null),
+      styles.main,      
+      borderBottom ? styles.borderBoxBottom : (frameBottomEnd ? styles.boxGeneralBottom : null),
+      borderRight ? styles.borderBoxRight : (frameRightEnd ? styles.boxGeneralRight : null),
     ]}>
       <Text 
         style={[
-          blockStyles.blockText,
-          isFixed? blockStyles.fixed : null,
-          isFocused ? blockStyles.focused: null, 
-          isClicked ? blockStyles.clicked: null]}
+          styles.blockText,
+          isFixed ? styles.fixed : null,
+          isFocused ? styles.focused: null, 
+          isClicked ? styles.clicked: null,
+          !(isFixed || isFocused || isClicked) ? styles.normalText : null
+        ]}
       > 
         {num !== 0 && num} 
       </Text>

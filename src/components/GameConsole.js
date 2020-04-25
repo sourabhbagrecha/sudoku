@@ -18,9 +18,8 @@ const styles = StyleSheet.create({
   main: {
     flexDirection: "row",
     flexWrap: "wrap",
-    width: 360,
-    marginTop: 30,
-    marginHorizontal: 20
+    width: "100%",
+    marginHorizontal: "5%"
   }
 })
 

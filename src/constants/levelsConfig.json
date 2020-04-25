@@ -5,18 +5,18 @@
   },
   {
     "title": "Easy",
-    "blanks": 32
+    "blanks": 31
   },
   {
     "title": "Medium",
-    "blanks": 40
+    "blanks": 37
   },
   {
     "title": "Hard",
-    "blanks": 48
+    "blanks": 43
   },
   {
     "title": "Extreme",
-    "blanks": 56
+    "blanks": 50
   }
 ]

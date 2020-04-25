@@ -23,10 +23,9 @@ function Board(props) {
 
 const styles = StyleSheet.create({
   main: {
-    width: 400,
+    width: "100%",
     height: 400,
-    marginHorizontal: 0,
-    marginTop: 40
+    marginTop: 5
   },
   row: {
     flexDirection: "row"

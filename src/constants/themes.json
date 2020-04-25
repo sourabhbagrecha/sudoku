@@ -1,0 +1,74 @@
+[
+  {
+    "title": "black",
+    "label": "Black",
+    "main": {
+      "backgroundColor": "black",
+      "color": "white"
+    },
+    "focused": {
+      "backgroundColor": "grey",
+      "color": "white"
+    },
+    "clicked": {
+      "backgroundColor": "white",
+      "color": "black"
+    },
+    "fixed": {
+      "backgroundColor": "rgba(255, 255, 255, 0.15)",
+      "color": "white"
+    },
+    "boxBorder": {
+      "region": "rgba(255, 255, 255, 0.5)",
+      "general": "rgba(255, 255, 255, 0.2)"
+    }
+  },
+  {
+    "title": "white",
+    "label": "White",
+    "main": {
+      "backgroundColor": "white",
+      "color": "black"
+    },
+    "focused": {
+      "backgroundColor": "rgba(0, 0, 0, 0.4)",
+      "color": "black"
+    },
+    "clicked": {
+      "backgroundColor": "black",
+      "color": "white"
+    },
+    "fixed": {
+      "backgroundColor": "rgba(0, 0, 0, 0.15)",
+      "color": "black"
+    },
+    "boxBorder": {
+      "region": "rgba(0, 0, 0, 0.5)",
+      "general": "rgba(0, 0, 0, 0.2)"
+    }
+  },
+  {
+    "title": "orange",
+    "label": "Orange",
+    "main": {
+      "backgroundColor": "rgba(255, 174, 26, 0.1)",
+      "color": "rgba(255, 174, 26, 1)"
+    },
+    "focused": {
+      "backgroundColor": "rgba(255, 174, 26, 0.7)",
+      "color": "white"
+    },
+    "clicked": {
+      "backgroundColor": "rgba(255, 174, 26, 1)",
+      "color": "white"
+    },
+    "fixed": {
+      "backgroundColor": "rgba(0, 0, 0, 0.5)",
+      "color": "black"
+    },
+    "boxBorder": {
+      "region": "rgba(0, 0, 0, 0.5)",
+      "general": "rgba(0, 0, 0, 0.2)"
+    }
+  }
+]
