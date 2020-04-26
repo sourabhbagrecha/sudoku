@@ -5,9 +5,11 @@ import { createAppContainer } from 'react-navigation';
 import {Provider as GameProvider} from './src/context/GameContext';
 import Game from './src/screens/Game';
 import { Provider as ThemeProvider } from './src/context/ThemeContext';
+import Menu from './src/screens/Menu';
 
 const navigator = createStackNavigator({
-  Home: Game
+  Home: Menu,
+  Game
 }, 
 {
   initialRouteName: "Home",

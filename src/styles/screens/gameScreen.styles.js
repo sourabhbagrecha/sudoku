@@ -28,7 +28,8 @@ export default themeTitle => {
     timer: {
       textAlign: "center",
       fontSize: 20,
-      marginTop: 10
+      marginTop: 10,
+      color: theme.main.color
     }
   })
 }
