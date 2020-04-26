@@ -12,7 +12,6 @@ function ConsoleButton(props) {
   const resetBoardFocusCallback = () => resetBoardFocus({num});
   const handleClick = () => {
     const requireFocus = board.every( row => row.every( cell => cell.isClicked === false ));
-    console.log({isFocused})
     if(isFocused) return resetConsoleFocus({num}, resetBoardFocusCallback);
     if(requireFocus){
       setFocused({num})

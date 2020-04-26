@@ -6,6 +6,10 @@
       "backgroundColor": "black",
       "color": "white"
     },
+    "meta": {
+      "backgroundColor": "black",
+      "color": "white"
+    },
     "focused": {
       "backgroundColor": "grey",
       "color": "white"
@@ -21,12 +25,19 @@
     "boxBorder": {
       "region": "rgba(255, 255, 255, 0.5)",
       "general": "rgba(255, 255, 255, 0.2)"
+    },
+    "secondaryText": {
+      "color": "white"
     }
   },
   {
     "title": "white",
     "label": "White",
     "main": {
+      "backgroundColor": "white",
+      "color": "black"
+    },
+    "meta": {
       "backgroundColor": "white",
       "color": "black"
     },
@@ -45,6 +56,9 @@
     "boxBorder": {
       "region": "rgba(0, 0, 0, 0.5)",
       "general": "rgba(0, 0, 0, 0.2)"
+    },
+    "secondaryText": {
+      "color": "grey"
     }
   },
   {
@@ -52,6 +66,10 @@
     "label": "Orange",
     "main": {
       "backgroundColor": "rgba(255, 174, 26, 0.1)",
+      "color": "rgba(255, 174, 26, 1)"
+    },
+    "meta": {
+      "backgroundColor": "grey",
       "color": "rgba(255, 174, 26, 1)"
     },
     "focused": {
@@ -69,6 +87,40 @@
     "boxBorder": {
       "region": "rgba(0, 0, 0, 0.5)",
       "general": "rgba(0, 0, 0, 0.2)"
+    },
+    "secondaryText": {
+      "color": "rgba(164,130,0,1.0)"
+    }
+  },
+  {
+    "title": "wetasphalt",
+    "label": "Wetasphalt",
+    "main": {
+      "backgroundColor": "rgba(23,42,61,1.0)",
+      "color": "rgba(161,169,180,1.0)"
+    },
+    "meta": {
+      "backgroundColor": "rgba(23,42,61,1.0)",
+      "color": "rgba(161,169,180,1.0)"
+    },
+    "focused": {
+      "backgroundColor": "rgba(0,19,37,1.0)",
+      "color": "white"
+    },
+    "clicked": {
+      "backgroundColor": "rgba(161,169,180,1.0)",
+      "color": "white"
+    },
+    "fixed": {
+      "backgroundColor": "rgba(46,67,87,1.0)",
+      "color": "white"
+    },
+    "boxBorder": {
+      "region": "rgba(0, 0, 0, 0.7)",
+      "general": "rgba(0, 0, 0, 0.1)"
+    },
+    "secondaryText": {
+      "color": "white"
     }
   }
 ]

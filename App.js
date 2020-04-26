@@ -3,9 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import {Provider as GameProvider} from './src/context/GameContext';
+import {Provider as LevelProvider} from './src/context/LevelContext';
 import Game from './src/screens/Game';
 import { Provider as ThemeProvider } from './src/context/ThemeContext';
 import Menu from './src/screens/Menu';
+import { setNavigator } from './src/NavigationRef';
 
 const navigator = createStackNavigator({
   Home: Menu,
@@ -21,9 +23,11 @@ const navigator = createStackNavigator({
 const App = createAppContainer(navigator);
 
 export default () => {
-  return <ThemeProvider>
-    <GameProvider>
-      <App/>
-    </GameProvider>
-  </ThemeProvider>
+  return <LevelProvider>
+    <ThemeProvider>
+      <GameProvider>
+        <App ref={(navigator) => { setNavigator(navigator) }}/>
+      </GameProvider>
+    </ThemeProvider>
+  </LevelProvider>
 };

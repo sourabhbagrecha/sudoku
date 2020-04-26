@@ -1,7 +1,7 @@
 import sudokuGenerator from "../utils/sudokuGenerator";
 
 export default (state, action) => {
-  const {x, y, num, isFocused, isClicked, level} = action.payload;
+  const {x, y, num, isFocused, isClicked, level, timer} = action.payload;
   switch(action.type){
     case 'set_focused': 
       return {
@@ -57,14 +57,14 @@ export default (state, action) => {
         ...state,
         board: state.board.map(row => (row.map(cell => ({...cell, isFocused: false}) )))
       }
-    case 'change_level':
-      const { puzzle, solution } = sudokuGenerator(level);
+    case 'initialize_board':
+      let { puzzle, solution } = action.payload;
+    default: 
       return {
         ...state,
         board: puzzle,
-        solution
+        solution,
+        timer
       }
-    default: 
-      return state
   }
 };

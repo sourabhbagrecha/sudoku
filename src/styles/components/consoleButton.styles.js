@@ -28,7 +28,7 @@ export default themeTitle => {
     },
     secondaryText: {
       textAlign: "center",
-      color: theme.focused.backgroundColor
+      color: theme.secondaryText.color
     },
     focusedSecondaryText: {
       color: theme.clicked.color

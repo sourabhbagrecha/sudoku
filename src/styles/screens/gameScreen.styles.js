@@ -14,21 +14,10 @@ export default themeTitle => {
       backgroundColor: theme.main.backgroundColor,
       flex: 1
     },
-    controls: {
-      width: "100%",
-      flexDirection: "row",
-      justifyContent: "space-around"
-    },
-    themeSelector: {
-      width: "44%"
-    },
-    levelSelector: {
-      width: "44%"
-    },
     timer: {
       textAlign: "center",
       fontSize: 20,
-      marginTop: 10,
+      marginVertical: 20,
       color: theme.main.color
     }
   })

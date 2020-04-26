@@ -5,21 +5,19 @@ export default (themeTitle) => {
   const theme = themes.find(t => t.title === themeTitle);
   return StyleSheet.create({
     main: {
-      flex: 1
+      flexDirection: "row"
     },
     themeSelectorOuter: {
       width: 50,
       height: 50,
       borderRadius: 25,
-      backgroundColor: theme.main.color,
       margin: 20,
       padding: 10
     },
     themeSelectorInner: {
       width: 30,
       height: 30,
-      borderRadius: 15,
-      backgroundColor: theme.main.backgroundColor,
+      borderRadius: 15
     }
   })
 }

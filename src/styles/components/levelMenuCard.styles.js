@@ -9,7 +9,7 @@ export default themeTitle => {
       height: (height*0.6),
       width: (width*0.8),
       marginHorizontal: (width*0.05),
-      marginTop: (height*0.1),
+      marginTop: (height*0.05),
       borderRadius: 10,
       backgroundColor: theme.main.backgroundColor,
       padding: 10
@@ -45,7 +45,7 @@ export default themeTitle => {
       justifyContent: "space-between"
     },
     logoBar: {
-      width: "16%",
+      width: "14%",
       borderColor: theme.main.color,
       borderWidth: 2,
       alignSelf: "flex-end"
