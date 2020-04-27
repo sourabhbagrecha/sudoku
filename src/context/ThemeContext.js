@@ -3,7 +3,6 @@ import ThemeReducer from "../reducers/Theme.reducer";
 import { AsyncStorage } from "react-native";
 
 const changeTheme = (dispatch) => async(payload) => {
-  console.log({payload});
   dispatch({ type: 'change_theme', payload });
   await AsyncStorage.setItem("theme", payload.theme)
 };

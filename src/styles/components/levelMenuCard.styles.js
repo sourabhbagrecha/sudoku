@@ -6,13 +6,14 @@ export default themeTitle => {
   const {height, width} = Dimensions.get('window');
   return StyleSheet.create({
     main: {
-      height: (height*0.6),
+      height: height<700 ? "80%" : "65%",
       width: (width*0.8),
       marginHorizontal: (width*0.05),
-      marginTop: (height*0.05),
+      marginTop: "10%",
       borderRadius: 10,
       backgroundColor: theme.main.backgroundColor,
-      padding: 10
+      padding: "3%",
+      paddingBottom: "7%"
     },
     title: {
       fontSize: 50,
@@ -24,20 +25,19 @@ export default themeTitle => {
       textAlign: "center",
       borderColor: theme.main.color,
       borderWidth: 3,
-      padding: 5,
+      padding: "2%",
       fontSize: 25,
       color: theme.main.color,
-      bottom: 0,
-      marginHorizontal: 20
+      marginHorizontal: "10%"
     },
     newGameButton: {
-      marginTop: 20
+      marginTop: "7%"
     },
     resumeButton: {
-      marginTop: 20
+      marginTop: "10%"
     },
     levelLogo: {
-      width: "60%",
+      width: "70%",
       height: "40%",
       marginTop: "10%",
       alignSelf: "center",

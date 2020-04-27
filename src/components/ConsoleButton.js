@@ -3,12 +3,16 @@ import { StyleSheet, View, Text } from 'react-native';
 import {Context as GameContext} from '../context/GameContext';
 import consoleButtonStyles from '../styles/components/consoleButton.styles';
 import { Context as ThemeContext } from '../context/ThemeContext';
+import { navigate } from '../NavigationRef';
+import Won from '../screens/Won';
+import { Context as LevelContext } from '../context/LevelContext';
 
 function ConsoleButton(props) {
   const { num, isFocused } = props;
   const { state: { board }, enterNumber, setFocused, resetConsoleFocus, resetBoardFocus} = useContext(GameContext);
   const { state: { currentTheme } } = useContext(ThemeContext);
   const styles = consoleButtonStyles(currentTheme);
+  const { refreshAfterWinning } = useContext(LevelContext);
   const resetBoardFocusCallback = () => resetBoardFocus({num});
   const handleClick = () => {
     const requireFocus = board.every( row => row.every( cell => cell.isClicked === false ));
@@ -38,5 +42,11 @@ function ConsoleButton(props) {
     </View>
   )
 };
+
+Won.navigationOptions = () => {
+  return {
+    headerShown: false
+  }
+}
 
 export default ConsoleButton;

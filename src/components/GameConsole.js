@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import ConsoleButton from './ConsoleButton'
 
 function GameConsole(props) {
@@ -13,13 +13,16 @@ function GameConsole(props) {
     </View>
   )
 };
+const {height, width} = Dimensions.get("window");
+const rem = height/770;
 
 const styles = StyleSheet.create({
   main: {
     flexDirection: "row",
     flexWrap: "wrap",
     width: "100%",
-    marginHorizontal: "5%"
+    marginTop: 30*rem,
+    justifyContent: "space-evenly"
   }
 })
 

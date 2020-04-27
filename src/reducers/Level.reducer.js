@@ -23,6 +23,28 @@ export default (state, action) => {
           }
         })
       }
+    case 'update_pending_game_timer': 
+      return {
+        ...state,
+        levels: state.levels.map(l => {
+          if(l.title === level){
+            return { ...l, pendingGame: { ...l.pendingGame, timer: timer } }
+          } else {
+            return l;
+          }
+        })
+      }
+    case 'refresh_after_winning':
+      return {
+        ...state,
+        levels: state.levels.map(l => {
+          if(l.title === level){
+            return { ...l, pendingGame: {} }
+          } else {
+            return l;
+          }
+        })
+      }
     case 'update_levels_data':
       return {
         ...state,

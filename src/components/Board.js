@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Block from './Block';
+import boardStyles from '../styles/components/board.styles';
+import { Context as ThemeContext } from '../context/ThemeContext';
 
 function Board(props) {
   const {boardState} = props;
+  const { state: { currentTheme } } = useContext(ThemeContext);
+  const styles = boardStyles(currentTheme);
   return (
     <View style={styles.main}>
       {
@@ -20,16 +24,5 @@ function Board(props) {
     </View>
   )
 };
-
-const styles = StyleSheet.create({
-  main: {
-    width: "100%",
-    height: 400,
-    marginTop: 5
-  },
-  row: {
-    flexDirection: "row"
-  }
-})
 
 export default Board;

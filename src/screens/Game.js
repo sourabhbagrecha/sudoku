@@ -1,22 +1,26 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Board from '../components/Board';
 import GameConsole from '../components/GameConsole';
-import { Text, View, AsyncStorage } from 'react-native';
+import { Text, View } from 'react-native';
 import { Context as GameContext } from '../context/GameContext';
 import gameScreenStyles from '../styles/screens/gameScreen.styles';
 import { Context as ThemeContext } from '../context/ThemeContext';
 import { Context as LevelContext } from '../context/LevelContext';
 import { withNavigation } from 'react-navigation';
+import themes from '../constants/themes.json';
+
+let themeNow = "black";
 
 function Game(props) {
   const {navigation} = props;
   const level = navigation.getParam('level');
-
-  const { state, state: { board }, initializeBoard} = useContext(GameContext);
+  
+  const { state, state: { board }, initializeBoard, resetBoardFocus, resetConsoleFocus} = useContext(GameContext);
   const { state: { currentTheme }, changeTheme } = useContext(ThemeContext);
-  const { state: { levels }, updatePendingGame } = useContext(LevelContext);
+  const { state: { levels }, updatePendingGame, refreshAfterWinning, updatePendingGameTimer } = useContext(LevelContext);
   const styles = gameScreenStyles(currentTheme);
   
+  themeNow = currentTheme;
   const [won, setWon] = useState(false);
   const [timerLocal, setTimer] = useState(timer);
   const [loading, setLoading] = useState(true);
@@ -24,10 +28,16 @@ function Game(props) {
   
   useEffect(() => {
     initializeBoard({puzzle, solution, timer});
+    resetBoardFocus({});
+    resetConsoleFocus({});
     setTimer(timer);
     setLoading(false);
     const interval = setInterval(() => {
-      setTimer(timerLocal => timerLocal+1)
+      if(won){
+        setTimer(timerLocal => timerLocal)
+      } else {
+        setTimer(timerLocal => timerLocal+1)
+      }
     }, 1000);
     return () => {
       clearInterval(interval);
@@ -36,19 +46,17 @@ function Game(props) {
 
   useEffect(() => {
     const currentBoard = board.map(row => row.map(cell => cell.num));
-    if(!loading && JSON.stringify(currentBoard) === JSON.stringify(solution)){
+    updatePendingGame({ level, puzzle: state.board, solution, timer: timerLocal });
+    if(!loading && currentBoard.length !== 0 && JSON.stringify(currentBoard) === JSON.stringify(solution)){
       setWon(true);
+      refreshAfterWinning({level});
+      navigation.navigate("Won", {board, timerLocal, level});
     }
   }, [board]);
-  
-  useEffect(() => {
-    updatePendingGame({ level, puzzle: state.board, solution, timer: timerLocal });
-    updateAsyncStorage()
-  }, [timerLocal])
 
-  const updateAsyncStorage = async () => {
-    await AsyncStorage.setItem("levelContext", JSON.stringify(levels))
-  }
+  useEffect(() => {
+    updatePendingGameTimer({ timer: timerLocal, level })
+  }, [timerLocal])
 
   return (
     !loading && <View style={styles.main}>
@@ -56,37 +64,27 @@ function Game(props) {
       <Board boardState={board} />
       {
         won ? 
-        <Text style={styles.title}>You win!</Text>:
+        <>
+          <Text style={styles.title}>You win!</Text>
+        </>
+        :
         <GameConsole nums={state.nums}/>
       }
     </View>
   )
 };
 
+Game.navigationOptions = ({navigation}) => {
+  const theme = themes.find(t => t.title === themeNow);
+  return {
+    headerStyle: {
+      backgroundColor: theme.main.backgroundColor
+    },
+    headerTintColor: theme.main.color,
+    headerTitleStyle: {
+      color: theme.main.color
+    }
+  }
+}
+
 export default withNavigation(Game);
-
-
-{/* <View style={styles.controls}>
-  <View style={styles.themeSelector}>
-    <RNPSelect
-      items={themes.filter(t => t.label !== "White").map(t => ({label: `Theme: ${t.label}`, value: t.title}))}
-      onValueChange={value => changeTheme({theme: value})}
-      placeholder={{label: "Theme: White", value: "white"}}
-      value={currentTheme}
-    />
-  </View>
-  <View style={styles.levelSelector}>
-    <RNPSelect
-      items={levels.filter(t => t.title !== "Easy").map(l => ({ label: `Level: ${l.title}`, value: l.title }))}
-      onValueChange={value => changeLevel({level: value})}
-      placeholder={{ label: 'Level: Easy', value: 'Easy' }}
-    />
-  </View>
-</View> */}
-
-// const checkTheme = async () => {
-//   const storedTheme = await AsyncStorage.getItem("theme");
-//   if(storedTheme){
-//     changeTheme({theme: storedTheme});
-//   }
-// }

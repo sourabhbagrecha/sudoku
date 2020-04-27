@@ -3,10 +3,7 @@ import { View, FlatList, AsyncStorage, Button, Text } from 'react-native';
 import menuScreenStyles from '../styles/screens/menuScreen.styles';
 import { Context as ThemeContext } from '../context/ThemeContext';
 import LevelMenuCard from '../components/LevelMenuCard';
-import { ListItem } from 'react-native-elements';
 import { Context as LevelContext } from '../context/LevelContext';
-import themes from '../constants/themes.json';
-import ModalDropdown from 'react-native-modal-dropdown';
 import ThemeController from '../components/ThemeController';
 
 function Menu(props) {
@@ -17,13 +14,12 @@ function Menu(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(()=> {
+    console.log(levels.find(l => l.title === "Beginner"))
     fetchAsyncStorage();
   }, [])
   
   const fetchAsyncStorage = async () => {
-    const levelsData = await AsyncStorage.getItem("levelContext");
     const themeTitle = await AsyncStorage.getItem("theme");
-    if(levelsData) updateLevelsData({ levels: JSON.parse(levelsData) })
     if(themeTitle) changeTheme({ theme: themeTitle })
     setLoading(false);
   }

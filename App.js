@@ -8,10 +8,12 @@ import Game from './src/screens/Game';
 import { Provider as ThemeProvider } from './src/context/ThemeContext';
 import Menu from './src/screens/Menu';
 import { setNavigator } from './src/NavigationRef';
+import Won from './src/screens/Won';
 
 const navigator = createStackNavigator({
   Home: Menu,
-  Game
+  Game,
+  Won
 }, 
 {
   initialRouteName: "Home",

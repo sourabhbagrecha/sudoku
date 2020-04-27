@@ -14,11 +14,9 @@ function LevelMenuCard(props) {
   const { initializeNewGame } = useContext(LevelContext);
   const styles = levelMenuCardStyles(currentTheme);
   const handleNewGameClick = () => {
-    console.log(`Initializing a new ${title} sudoku`);
     initializeNewGame({level: title});
   }
   const handleResumeGameClick = () => {
-    console.log(`Resuming ${title} sudoku`);
     navigate("Game", {level: title})
   }
   return (
@@ -28,7 +26,7 @@ function LevelMenuCard(props) {
         {[1,2,3,4,5].map(bar => <View key={bar} style={[styles.logoBar, {height: `${(20+(bar*15))}%`}, difficulty >= bar && styles.filled]}></View>)}
       </View>
       {
-        pendingGame.timer ?
+        pendingGame.puzzle ?
         <TouchableOpacity
           onPress={handleResumeGameClick}
         >
