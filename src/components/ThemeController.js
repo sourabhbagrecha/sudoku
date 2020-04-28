@@ -18,7 +18,7 @@ function ThemeController(props) {
     <View style={styles.main}>
       {themes.map(t => 
         <TouchableOpacity key={t.title} onPress={() => handleThemeChange(t)}>
-          <View style={[currentTheme === t.title && { height: 60, width: 60, backgroundColor: t.meta.color, borderRadius: 30, margin: 10 }]}>
+          <View style={[currentTheme === t.title && styles.selectedTheme]}>
             <View style={[styles.themeSelectorOuter, {backgroundColor: t.meta.backgroundColor}]}>
               <View style={[styles.themeSelectorInner, {backgroundColor: t.meta.color}]}>
               </View>

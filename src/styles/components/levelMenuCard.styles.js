@@ -4,16 +4,25 @@ import themes from '../../constants/themes.json';
 export default themeTitle => {
   const theme = themes.find(t => t.title === themeTitle);
   const {height, width} = Dimensions.get('window');
+  const rem = height/770;
   return StyleSheet.create({
     main: {
-      height: height<700 ? "80%" : "65%",
-      width: (width*0.8),
-      marginHorizontal: (width*0.05),
-      marginTop: "10%",
+      marginHorizontal: (width*0.03),
+      marginTop: "1%",
+    },
+    cardCommon: {
       borderRadius: 10,
       backgroundColor: theme.main.backgroundColor,
+    },
+    intro: {
       padding: "3%",
-      paddingBottom: "7%"
+      height: "65%",
+      width: (width*0.8),
+    },
+    records: {
+      width: (width*0.8),
+      marginTop: (height*0.01),
+      padding: 15*rem
     },
     title: {
       fontSize: 50,
@@ -26,7 +35,7 @@ export default themeTitle => {
       borderColor: theme.main.color,
       borderWidth: 3,
       padding: "2%",
-      fontSize: 25,
+      fontSize: 23*rem,
       color: theme.main.color,
       marginHorizontal: "10%"
     },
@@ -52,6 +61,14 @@ export default themeTitle => {
     },
     filled: {
       backgroundColor: theme.main.color
+    },
+    titleSecondary: {
+      fontSize: 25*rem,
+      color: theme.main.color,
+      fontWeight: "bold"
+    },
+    bodyText: {
+      color: theme.main.color
     }
   })
 }

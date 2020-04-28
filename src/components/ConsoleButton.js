@@ -1,19 +1,17 @@
 import React, { useContext } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
 import {Context as GameContext} from '../context/GameContext';
 import consoleButtonStyles from '../styles/components/consoleButton.styles';
 import { Context as ThemeContext } from '../context/ThemeContext';
-import { navigate } from '../NavigationRef';
 import Won from '../screens/Won';
-import { Context as LevelContext } from '../context/LevelContext';
+import { Context as RecordContext } from '../context/RecordContext';
 
 function ConsoleButton(props) {
   const { num, isFocused } = props;
   const { state: { board }, enterNumber, setFocused, resetConsoleFocus, resetBoardFocus} = useContext(GameContext);
   const { state: { currentTheme } } = useContext(ThemeContext);
   const styles = consoleButtonStyles(currentTheme);
-  const { refreshAfterWinning } = useContext(LevelContext);
-  const resetBoardFocusCallback = () => resetBoardFocus({num});
+  const { state: { records }, addRecord } = useContext(RecordContext);
   const handleClick = () => {
     const requireFocus = board.every( row => row.every( cell => cell.isClicked === false ));
     if(isFocused) return resetConsoleFocus({num}, resetBoardFocusCallback);

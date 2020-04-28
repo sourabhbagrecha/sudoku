@@ -8,7 +8,7 @@ export default (level) => {
     series.push(nums[randIndex]);
     nums.splice(randIndex, 1);
   }
-  const pattern = [0, -3, -3, 1, 3, 3, -2, -3, -3];
+  const pattern = [0, 3, 3, 4, 6, 6, -2, -3, -3];
   let patternNew = [];
   pattern.map((p, i, arr) => {
     if(i === 0) return patternNew.push(p);

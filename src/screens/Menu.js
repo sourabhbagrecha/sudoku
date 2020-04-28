@@ -5,22 +5,27 @@ import { Context as ThemeContext } from '../context/ThemeContext';
 import LevelMenuCard from '../components/LevelMenuCard';
 import { Context as LevelContext } from '../context/LevelContext';
 import ThemeController from '../components/ThemeController';
+import { Context as RecordContext } from '../context/RecordContext';
 
 function Menu(props) {
   const {} = props
   const { state: { currentTheme }, changeTheme } = useContext(ThemeContext);
   const { state: { levels }, updateLevelsData } = useContext(LevelContext);
+  const { state: { records }, updateRecordsData } = useContext(RecordContext)
   const styles = menuScreenStyles(currentTheme);
   const [loading, setLoading] = useState(true);
 
   useEffect(()=> {
-    console.log(levels.find(l => l.title === "Beginner"))
     fetchAsyncStorage();
   }, [])
   
   const fetchAsyncStorage = async () => {
     const themeTitle = await AsyncStorage.getItem("theme");
-    if(themeTitle) changeTheme({ theme: themeTitle })
+    const levelsData = await AsyncStorage.getItem("levels");
+    const recordsData = await AsyncStorage.getItem("records");
+    if(themeTitle) changeTheme({ theme: themeTitle });
+    if(levelsData) updateLevelsData({ levels: JSON.parse(levelsData) });
+    if(recordsData) updateRecordsData({ records: JSON.parse(recordsData) });
     setLoading(false);
   }
   return (

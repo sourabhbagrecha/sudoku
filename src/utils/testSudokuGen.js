@@ -33,4 +33,3 @@ const puzzle = sudoku.map(s => s);
 blankSets.forEach(b => {
   puzzle[b.row][b.cell] = 0;
 });
-console.log(puzzle);

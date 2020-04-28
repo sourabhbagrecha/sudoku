@@ -6,6 +6,7 @@ import wonScreenStyles from '../styles/screens/wonScreen.styles';
 import { View, Text, BackHandler, AsyncStorage } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Context as LevelContext} from '../context/LevelContext';
+import { Context as RecordContext } from '../context/RecordContext';
 
 function Won(props) {
   const {navigation} = props;
@@ -15,6 +16,8 @@ function Won(props) {
   
   const { state: { currentTheme } } = useContext(ThemeContext);
   const { state: { levels }, refreshAfterWinning } = useContext(LevelContext);
+  const { state: { records }, addRecord } = useContext(RecordContext);
+
   const styles = wonScreenStyles(currentTheme);
 
   const handleNewGameClick = () => {
@@ -24,13 +27,17 @@ function Won(props) {
     return true;
   }
   useEffect(() => {
-    console.log(levels.find(l => l.title === "Beginner"))
-    refreshAfterWinning({level})
+    refreshAfterWinning({level});
+    updateStorage();
     BackHandler.addEventListener('hardwareBackPress', eventListener);
     return async () => {
       BackHandler.removeEventListener('hardwareBackPress', eventListener)
     }
   }, []);
+
+  const updateStorage = async () => {
+    await AsyncStorage.setItem("records", JSON.stringify(records));
+  }
   return (
     <View style={styles.main}>
       <Text style={styles.title}>You Win!</Text>

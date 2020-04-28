@@ -6,20 +6,6 @@ export default (themeTitle) => {
   return StyleSheet.create({
     main: {
       flex: 1
-    },
-    themeSelectorOuter: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
-      backgroundColor: theme.main.color,
-      margin: 20,
-      padding: 10
-    },
-    themeSelectorInner: {
-      width: 30,
-      height: 30,
-      borderRadius: 15,
-      backgroundColor: theme.main.backgroundColor,
     }
   })
 }

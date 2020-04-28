@@ -1,13 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Board from '../components/Board';
 import GameConsole from '../components/GameConsole';
-import { Text, View } from 'react-native';
+import { Text, View, AsyncStorage } from 'react-native';
 import { Context as GameContext } from '../context/GameContext';
 import gameScreenStyles from '../styles/screens/gameScreen.styles';
 import { Context as ThemeContext } from '../context/ThemeContext';
 import { Context as LevelContext } from '../context/LevelContext';
 import { withNavigation } from 'react-navigation';
 import themes from '../constants/themes.json';
+import { Context as RecordContext } from '../context/RecordContext';
 
 let themeNow = "black";
 
@@ -18,6 +19,8 @@ function Game(props) {
   const { state, state: { board }, initializeBoard, resetBoardFocus, resetConsoleFocus} = useContext(GameContext);
   const { state: { currentTheme }, changeTheme } = useContext(ThemeContext);
   const { state: { levels }, updatePendingGame, refreshAfterWinning, updatePendingGameTimer } = useContext(LevelContext);
+  const { state: { records }, addRecord } = useContext(RecordContext);
+
   const styles = gameScreenStyles(currentTheme);
   
   themeNow = currentTheme;
@@ -48,6 +51,8 @@ function Game(props) {
     const currentBoard = board.map(row => row.map(cell => cell.num));
     updatePendingGame({ level, puzzle: state.board, solution, timer: timerLocal });
     if(!loading && currentBoard.length !== 0 && JSON.stringify(currentBoard) === JSON.stringify(solution)){
+      addRecord({ level, time: timerLocal, date: Date.now() })
+      updateLocalStorage();
       setWon(true);
       refreshAfterWinning({level});
       navigation.navigate("Won", {board, timerLocal, level});
@@ -55,8 +60,13 @@ function Game(props) {
   }, [board]);
 
   useEffect(() => {
-    updatePendingGameTimer({ timer: timerLocal, level })
-  }, [timerLocal])
+    updatePendingGameTimer({ timer: timerLocal, level });
+    updateLocalStorage();
+  }, [timerLocal]);
+
+  const updateLocalStorage = () => {
+    AsyncStorage.setItem("levels", JSON.stringify(levels))
+  }
 
   return (
     !loading && <View style={styles.main}>

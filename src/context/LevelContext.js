@@ -12,7 +12,6 @@ const initializeNewGame = dispatch => payload => {
 }
 
 const updatePendingGame = dispatch => (payload, callback) => {
-  console.log('updating!!', payload.timer)
   dispatch({ type: 'update_pending_game', payload })
   if(callback) callback();
 }

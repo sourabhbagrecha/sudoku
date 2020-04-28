@@ -18,6 +18,13 @@ export default (themeTitle) => {
       width: 30,
       height: 30,
       borderRadius: 15
+    },
+    selectedTheme: {
+      width: 60, 
+      height: 60,
+      margin: 10,
+      borderRadius: 30, 
+      backgroundColor: theme.meta.color
     }
   })
 }

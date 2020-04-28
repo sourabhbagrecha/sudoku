@@ -9,6 +9,7 @@ import { Provider as ThemeProvider } from './src/context/ThemeContext';
 import Menu from './src/screens/Menu';
 import { setNavigator } from './src/NavigationRef';
 import Won from './src/screens/Won';
+import { Provider as RecordProvider } from './src/context/RecordContext';
 
 const navigator = createStackNavigator({
   Home: Menu,
@@ -26,10 +27,12 @@ const App = createAppContainer(navigator);
 
 export default () => {
   return <LevelProvider>
-    <ThemeProvider>
-      <GameProvider>
-        <App ref={(navigator) => { setNavigator(navigator) }}/>
-      </GameProvider>
-    </ThemeProvider>
+    <RecordProvider>
+      <ThemeProvider>
+        <GameProvider>
+          <App ref={(navigator) => { setNavigator(navigator) }}/>
+        </GameProvider>
+      </ThemeProvider>
+    </RecordProvider>
   </LevelProvider>
 };
